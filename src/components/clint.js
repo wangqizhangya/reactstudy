@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" >
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <script type="text/javascript" src="%PUBLIC_URL%/static/js/jquery.js"></script>
-	<script type="text/javascript" src="%PUBLIC_URL%/static/js/swiper.min.js"></script>
-	<script type="text/javascript">
-		/**
- * Created by yangzhao on 7/25/17.
- */
-	(function(win) {
-	
+(function(win) {
 	
 	'use strict';
 	var already = false; // 是否已初始化
@@ -42,7 +7,7 @@
 	var METHODS = [ 'device.image.getCamera', 'device.image.getImage',
 			'biz.contact.selectContact', 'biz.contact.selectContactMulti',
 			'device.map.getLocation', 'device.map.getCurrentLocation', 
-			'biz.message.sendShortMessage','biz.contact.joinGroupChat','biz.contact.makeCall','biz.contact.chatWithManager','biz.contact.consultService','biz.contact.rightButton','biz.message.setAppTitle','biz.contact.selectContacts','biz.chat.createChat','yqx.biz.user.showUserDetail' ];
+			'biz.message.sendShortMessage','biz.contact.joinGroupChat','biz.contact.makeCall','biz.contact.consultService','biz.contact.share','biz.message.setAppTitle','biz.chat.createChat','yqx.biz.user.showUserDetail' ];
 	
 	var yqx = {				
 		ios : (/iphone|ipad|ipod/).test(navigator.userAgent.toLowerCase()),
@@ -275,16 +240,10 @@
 		case 'biz.contact.makeCall':
 			watch = true;
 			break;
-		case 'biz.contact.chatWithManager':
-			watch = true;
-			break;
 		case 'biz.contact.consultService':
 			watch = true;
 			break;
-		case 'biz.contact.rightButton':
-			watch = true;
-			break;
-		case 'biz.contact.selectContacts':
+		case 'biz.contact.share':
 			watch = true;
 			break;
 		
@@ -343,27 +302,15 @@
 					} else if (suff == "makeCall") {
 						var timestamp = (new Date()).valueOf();
 						console.log(timestamp);
-						
 						callAppFunction("makeCall",timestamp,p.params);
-					} else if (suff == "chatWithManager") {
-						var timestamp = (new Date()).valueOf();
-						console.log(timestamp);
-//						alert(p.params.managerId)
-						callAppFunction("chatWithManager",timestamp,p.params);
-					}else if (suff == "consultService") {
+					} else if (suff == "consultService") {
 						var timestamp = (new Date()).valueOf();
 						console.log(timestamp);
 						callAppFunction("consultService",timestamp,p.params);
-					} else if (suff == "rightButton") {
+					} else if (suff == "share") {
 						var timestamp = (new Date()).valueOf();
 						console.log(timestamp);
-						
-						callAppFunction("rightButton",timestamp,p.params);
-						
-					} else if (suff == "selectContacts") {
-						var timestamp = (new Date()).valueOf();
-						console.log(timestamp);
-						callAppFunction("selectContacts",timestamp,p.params);
+						callAppFunction("share",timestamp,p.params);
 					} 
 					
 				} else {
@@ -421,7 +368,6 @@
 //			alert("3");
 
 		} else {
-			
 			appFunction.callAppFunction(methods, methodid, JSON
 					.stringify(paramss));
 
@@ -540,25 +486,10 @@
 	/**
 	 * 16.分享
 	 */
-	yqx.biz.contact.rightButton = function(backFunc) {
+	yqx.biz.contact.share = function(backFunc) {
 
-		win._generator("biz.contact.rightButton", backFunc);
+		win._generator("biz.contact.share", backFunc);
 	}
-	/**
-	 * 17.选人
-	 */
-	yqx.biz.contact.selectContacts= function(backFunc) {
-
-		win._generator("biz.contact.selectContacts", backFunc);
-	}
-	/**
-	 * 18.加入聊天
-	 */
-	yqx.biz.contact.chatWithManager= function(backFunc) {
-
-		win._generator("biz.contact.chatWithManager", backFunc);
-	}
-	
 	// 国际范儿
 	if (typeof module === 'object' && module
 			&& typeof module.exports === 'object') {
@@ -575,37 +506,16 @@
  * 统一的回调
  */
 
-appFunctionCallback=function(method,methodId,success,data){
-	if(method=='shareSuccess'&&success=='1'){
-		$('.bottom').html("<div class='downloadmore'>下载和办公并到我的服务了解更多</div>")
-	}
+appFunctionCallback=function(method,  methodId,  success,  data){
 	
+//	if(success){
+//		
+//		_appCallbackLocation(method,data);
+//	}
 }
 
-
-	</script>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-  <script type="text/javascript">
-		function setFontSize(){
-		 	// 设计稿 640px
-			var width = document.documentElement.clientWidth;
-			console.log(width)
-			var fontSize = (width / 750) * 100;
-			document.getElementsByTagName("html")[0].style.fontSize = fontSize + "px";
-		} 
-		window.onresize=setFontSize//监听屏幕变化，变化时触发。
-		setFontSize();
-	</script>
-	
-</html>
+_appCallbackLocation = function(backId, Loction) {
+	yqx._callback = Loction;
+	_generator("backId", yqx._callobject);
+	delete yqx._callobject;
+}

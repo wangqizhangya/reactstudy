@@ -1,0 +1,75 @@
+#app{
+    height:100%;
+}
+.indexsign{
+    width:100%;
+    height:100%;
+    background:#fff;
+    position:relative;
+    .headermain,.changelogs{
+        display:none;
+    }
+    .noData{
+            width:95.7%;
+            height:1.5rem;
+            font-size:0.3rem;
+            color:#333;
+            padding:0.3rem 0 0 0.3rem!important;
+        }
+    .mainsign{
+        width:100%;
+        position:relative;
+        
+        height:62%;
+        overflow: auto;
+        
+        
+    }
+    .signState{
+        width:100%;
+        font-size:0.3rem;
+        height:5rem;
+        border-bottom:1px solid #ccc;
+        
+    }
+    .activeRule{
+        width:100%;
+        font-size:0.25rem;
+        .txts{
+            margin-left:0.64rem!important;
+            line-height:0.4rem;
+            color:#9d9d9e;
+            width:87%;
+            
+            .bolder{
+                font-weight:bold;
+            }
+        }
+        h2{
+            text-align: center;
+            font-size:0.3rem;
+            
+            height:1rem;
+            line-height:1rem;
+            color:#666666;
+            font-size:0.33rem;
+        }
+        .txtinner{
+            margin-left:1.09rem!important;
+        }
+    }
+    .excflow{
+        width:92%;
+        font-size:0.3rem;
+        background:#1da1f2;
+        height:0.9rem;
+        color:#fff;
+        text-align:center;
+        line-height:0.9rem;
+        position:fixed;
+        bottom:0.3rem;
+        margin-left:0.3rem!important;
+        border-radius:0.1rem;
+        text-decoration:none;
+    }
+}
